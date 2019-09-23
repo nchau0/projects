@@ -1,0 +1,234 @@
+/* 
+Cadilnis Chau
+CIS 4004 - M. Llewellyn 
+Spring 2018
+Project 3
+*/
+
+
+
+
+/*ID*/
+#address {
+	color: #191960;
+	background-image: url('images/ocean.jpg');	
+	border: 1px solid #FFE4C4;
+	border-radius: 2px;
+	font-size: 92%; 
+	font-family: calibri;
+}
+
+#wrapper {
+	margin-left: auto; 
+	margin-right: auto;
+	max-width: 900px; 
+	min-width: 750px; 
+	width: 80%;
+}
+
+
+/*Classes*/
+.spacer {
+	padding-bottom: 100px;
+}
+
+.phone {
+	color: #FFE4C4;
+}
+
+.right {
+	float: right;
+	height: 75px; 
+	width: 100px;
+}
+
+
+/*CSS for HTML Code*/
+
+body {
+	background-color: #00BFFF;
+	background-image: url('images/ocean.jpg');
+	background-repeat: repeat-x; 
+	color: #221811;
+	font-family: verdana, arial, sans-serif;
+}
+
+/*Removed for Project 4*/
+/*dd {color: #221811;}
+
+dt {color: #FFE4C4;}*/
+
+table caption {
+	text-align: left; 
+	font-size: 1.2em;
+}
+
+footer {
+	background-color: #191970; 
+	background-image: url('images/lighthouselogo1.jpg');
+	height: 35px; 
+	margin-top: -2em; 
+	border: 1px solid #FFE4C4;
+	border-radius: 6px;
+	color: #FFE4C4;
+	font-size: small; 
+	font-style: italic; 
+	text-align: center; 
+}
+
+header {
+	background-color: #191970;
+	border-radius: 15px;
+	text-align: center; 
+	color: #FFE4C4;
+}
+
+	header h1 {
+		background-image: url('images/lighthouselogo.jpg');
+		background-repeat: no-repeat;
+		height: 110px; 
+		padding: 30px 0 0 130px;
+		border: 1px solid #FFE4C4;
+		border-radius: 15px;
+		color: #00008B;
+		line-height: 200%;
+	}
+
+h3 {color: #FFE4C4;}
+
+li {color: #FFE4C4;}
+
+main {
+	width: auto;
+	display: table-cell;
+}
+
+	main img {float: right; }
+	
+	main ul {padding-left: 15px;}
+
+	/* main ul li {list-style-image: url('images/marker.gif');}  removed from this project */
+
+
+nav {
+	width: 200px;
+	display: table-cell;
+	padding: 10px;
+	font-weight: bold;
+	text-align: left;
+}
+
+	nav a {text-decoration: none; display: block}
+
+	nav ul {margin: 0; padding: 0;}
+
+	nav ul li {list-style-type: none;}
+
+	
+
+p u {color: #A52A2A;}
+
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0; 
+	border: 2px solid white;
+	font-size: 1.2em; 
+}
+
+th {
+	text-align: center; 
+	padding: 15px;
+	color: #EAEAEA;
+	background-color: #00008B;
+	font-family: calibri; 
+	font-size: 1.4em; 
+}
+
+tr:first-of-type {
+	background-color: #00008B;
+}
+
+tr:nth-of-type(odd){
+	background-color: #A9A9A9;
+	color: #00008B; 
+}
+
+
+td {
+	text-align: center;
+}
+
+
+/* Tablet Media Queries */
+@media only screen and (max-width: 64em)
+{
+	#address { border: none;
+			   background-image: none; }
+
+	#phoneMode {display: none;}
+
+	#wrapper {	min-width: 0; 
+				width: auto; 
+				box-shadow: none;
+			 }
+
+	body{ margin: 0 0 0 0; }
+	
+	
+	main {	margin-left: 0; 
+			display: block;
+		 }
+	
+		 main img { margin-bottom: 5px; } /*Check back*/
+	
+	nav  {	display: inline;  
+			width: auto;
+			text-align: center; 
+			padding: 0.5em;
+		 }
+	
+		nav ul li a{ display: inline; 
+				 padding: 0.25em 0.75em 0.25em 0.75em;
+			   }
+
+	
+}
+
+/* Phone Media Queries */
+@media only screen and (max-width: 37.5em)
+{
+	#address { border: none; 
+			   background-image: none;}
+
+	#phoneMode { display: block; }
+
+	main { padding: 0.1em 1em 0.1em 1em; 
+		   font-size: 90%;}
+
+		main img { 	 display: none;
+					 background-image: none; 
+					 height: 0;
+				 }
+
+	h1 { font-size: 1.5em; }
+
+	header { padding-top: 1em; } 
+
+	
+	nav li { display: block; 
+				margin: 0;
+				border-bottom: 1px solid #FFE4C4;
+				border-top: 1px solid #FFE4C4;
+			}
+	nav ul li a {
+		display: block;
+		margin: 0;
+		padding: 0;
+	}
+	
+	table {display: none;}
+
+
+}
+	
