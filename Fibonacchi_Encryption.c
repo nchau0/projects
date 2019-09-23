@@ -1,7 +1,7 @@
 //+-------------------------------+
-//| Cadilnis Chau 			      |		
-//| Fibonacci -- so hard -_-      |
-//| COP 3502 - McAlpin Fall 2017  |
+//| Cadilnis Chau 		  |	      |		
+//| Fibonacci -- Encryption       |
+//|  				  |
 //+-------------------------------+
 
 #include <stdio.h> 
