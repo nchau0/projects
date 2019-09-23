@@ -1,0 +1,187 @@
+// Programing 2: Concurrency and I/O Subsystem 
+// Cadilnis Chau 
+// CGS 3763 Fall 2016 
+// UCF -- E. Montagne 
+
+
+semaphore full;
+semaphore full2;
+semaphore full3;
+
+semaphore print; 
+ 
+semaphore mutex; 
+semaphore mutex2;
+semaphore mutex3;
+
+semaphore IOREQ; 
+semaphore REQSER;
+semaphore REQPEN; 
+semaphore PHYSIO; 
+semaphore OPCOM; 
+
+int ID;  
+int ADDR;
+
+int BID; 
+int BADDR; 
+
+int TID; 
+int TADDR; 
+
+int T2ID;
+int T2ADDR;
+
+int DiskADDR; 
+int DADDR; 
+
+int IORQ1[5];
+int IORQ2[5];
+
+int i = 1; 
+
+int j, y, x, f; 
+int bufferSize = 5; 
+
+
+void USER() 
+{
+
+for (j = 0; j < 10; j++)
+{
+ID = 1; 
+ADDR = random(200); 
+p(full); 
+p(mutex); 
+BID = ID; 
+BADDR = ADDR; 
+v(mutex);
+	p(print);
+		cout << "User 1 executes system call SIO or DOIO" << endl; 
+	v(print);
+v(IOREQ);
+p(REQSER);
+	p(print); 
+		cout << "Driver signal user 1 (operation complete)" << endl; 
+	v(print);
+}
+}
+
+void DOIO()
+{
+
+
+for(y = 0; y < 10; y++)
+{
+int k = 0; 
+
+p(IOREQ);   
+p(mutex); 
+TID = BID; 
+TADDR = BADDR; 
+v(mutex);  
+v(full); 
+
+//producer 
+p(full2); 
+p(mutex2);
+IORQ1[k] = TID; 
+IORQ2[k] = TADDR; 
+k++; //increment index +1  
+
+//if k = bufferSize, then reset k to 0 
+if(k == bufferSize)
+k = 0; 
+v(mutex2); 
+p(print);
+	cout << "DOIO assembles IORB and inserts it in IORQ" << endl; 
+v(print);
+v(REQPEN); 
+}
+}
+
+
+void DEVICE_DRIVER()
+{
+
+for (x = 0; x < 10; x++)
+{
+int m = 0; 
+int k = 0; 
+
+p(REQPEN); 
+p(mutex2); 
+T2ID = IORQ1[m]; 
+T2ADDR = IORQ2[m]; 
+m++; 
+
+//loop to reset m to 0 
+if (m == bufferSize)
+m = 0; 
+
+v(mutex2); // size is equal to buffer size
+v(full2);  // size is equal to buffer size  
+
+//producer
+p(full3); 
+p(mutex3); 
+DADDR = T2ADDR; 
+v(mutex3); 
+	p(print);
+		cout << "Driver initiates I/O operation for user 1" << endl; 
+	v(print);
+v(PHYSIO); 
+	p(print);
+		cout << "Disk completes I/O operation" << endl; 
+	v(print);
+p(OPCOM); 
+v(REQSER);
+}
+}
+
+
+void DISK()
+{
+
+for (f = 0; f < 10; f++)
+{
+int i; 
+
+p(PHYSIO); 
+p(mutex3); 
+DiskADDR = DADDR; 
+	for (i = 1; i < DiskADDR ; i++)
+	{
+ 		//nothing here
+	} 
+v(mutex3); 
+v(full3);  
+v(OPCOM); 
+}
+}
+
+
+main() 
+{
+
+initialsem (print, 1); 
+initialsem (full, 1); 
+initialsem (full2, bufferSize);
+initialsem (full3, bufferSize);
+
+initialsem (mutex, 1); 
+initialsem (mutex2, 1); 
+initialsem (mutex3, 1); 
+
+initialsem (PHYSIO, 0);
+initialsem (OPCOM, 0);
+initialsem (IOREQ, 0); 
+initialsem (REQPEN, 0);
+initialsem (REQSER, 0);
+	cobegin
+	 {
+		USER(); DOIO(); DEVICE_DRIVER(); DISK();  
+	 }
+
+
+}
